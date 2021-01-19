@@ -44,7 +44,7 @@ PlayScene::PlayScene() : Scene()
 {
 	keyHandler = new PlayScenceKeyHandler(this);
 	LoadBaseObjects();
-	ChooseMap(STAGE_1*3);
+	ChooseMap(STAGE_1*2);
 	Game::GetInstance()->ResetTimer();
 }
 
@@ -131,7 +131,6 @@ void PlayScene::Update(DWORD dt)
 		countDownReset += dt;
 		if (countDownReset > 1500 && idStage == 1000)
 		{
-
 			ChooseMap(500);
 			posMario = 10;
 		}
@@ -427,13 +426,13 @@ void PlayScene::PlayerTailAttackEnemy()
 				{
 					listLeaf[i]->SetState(LEAF_STATE_WALKING);
 				}
-				/*else
+				else
 				{
 					player->SetLevel(MARIO_LEVEL_RACCOON);
 					leaf->isDeath = true;
 					leaf->make1000 = true;
 					Game::GetInstance()->Score += 1000;
-				}*/
+				}
 			}
 		}
 	}

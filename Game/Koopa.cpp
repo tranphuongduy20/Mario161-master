@@ -300,12 +300,15 @@ void Koopa::Update(DWORD dt, vector<LPGAMEENTITY>* coObjects)
 				else if (dynamic_cast<BrokenBrick*>(e->obj))
 				{
 					BrokenBrick* brokenbrick = dynamic_cast<BrokenBrick*>(e->obj);
-					if (GetState() == KOOPA_RED_STATE_DIE_AND_MOVE || GetState() == KOOPA_RED_STATE_DIE_AND_MOVE_UP)
+					if (e->nx != 0)
 					{
-						//BrokenBrick* brokenbrick = dynamic_cast<BrokenBrick*>(e->obj);
-						//brokenbrick->isDestroyed = true;
-						brokenbrick->SetState(STATE_DESTROYED);
-						vx = -vx;
+						if (GetState() == KOOPA_RED_STATE_DIE_AND_MOVE || GetState() == KOOPA_RED_STATE_DIE_AND_MOVE_UP)
+						{
+							//BrokenBrick* brokenbrick = dynamic_cast<BrokenBrick*>(e->obj);
+							//brokenbrick->isDestroyed = true;
+							brokenbrick->SetState(STATE_DESTROYED);
+							vx = -vx;
+						}
 					}
 					else if (e->ny < 0 && GetState() != KOOPA_RED_STATE_DIE_AND_MOVE && GetState() != KOOPA_RED_STATE_DIE_AND_MOVE_UP)
 					{
@@ -322,6 +325,11 @@ void Koopa::Update(DWORD dt, vector<LPGAMEENTITY>* coObjects)
 							SetState(KOOPA_RED_STATE_WALKING_LEFT);
 							vx = -KOOPAS_WALKING_SPEED;
 						}
+					}
+					else if (e->nx != 0)
+					{
+						this->nx = -this->nx;
+						SetState(KOOPA_RED_STATE_WALKING_LEFT);
 					}
 				}
 				else
